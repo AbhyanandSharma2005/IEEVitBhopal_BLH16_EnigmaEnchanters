@@ -17,7 +17,7 @@ Technologies Used :- Python - core programming language .
                      OpenWeatherMap API - third-party service that provides weather data & information .
                      OpenAI API - Another third-party service that provides AI capabilities used to generate personalized health advice based on the fetched weather data 
                      and the user's health information .
-                     JSON - JavaScript Object Notation, used to parse and handle the data returned from the OpenWeatherMap API
+                     JSON - JavaScript Object Notation, used to parse and handle the data returned from the OpenWeatherMap API. 
                      Python's Built-in Libraries - messagebox from tkinter : to display error messages in case the API request fails or the city is not found .
                                                    datetime : The OpenWeatherMap API returns date and time information as part of the forecast data .
                                                    
