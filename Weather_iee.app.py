@@ -1,10 +1,9 @@
-
 import tkinter as tk
 from tkinter import messagebox
 import requests
 import openai
 
-# Function to get weather, AQI, and 5-day forecast data
+# Function to get weather data
 def get_weather(city_name, api_key):
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = base_url + "q=" + city_name + "&appid=" + api_key + "&units=metric"
@@ -26,21 +25,10 @@ def get_weather(city_name, api_key):
             "Wind Speed": wind["speed"]
         }
 
-        # Get coordinates for AQI and forecast
+        # Get coordinates for forecast
         coord = data["coord"]
         lat = coord["lat"]
         lon = coord["lon"]
-
-        # Fetch AQI data
-        aqi_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-        aqi_response = requests.get(aqi_url)
-        aqi_data = aqi_response.json()
-
-        if aqi_response.status_code == 200 and "list" in aqi_data:
-            aqi = aqi_data["list"][0]["main"]["aqi"]
-            weather_info["AQI"] = aqi
-        else:
-            weather_info["AQI"] = "AQI Data Not Available"
 
         # Fetch 5-day forecast data
         forecast_url = f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}&units=metric"
@@ -79,8 +67,7 @@ def generate_health_advice(name, age, condition, weather_info, openai_api_key):
         f" - Temperature: {weather_info['Temperature']}°C\n"
         f" - Weather Description: {weather_info['Weather Description']}\n"
         f" - Humidity: {weather_info['Humidity']}%\n"
-        f" - Wind Speed: {weather_info['Wind Speed']} m/s\n"
-        f" - Air Quality Index (AQI): {weather_info['AQI']}\n\n"
+        f" - Wind Speed: {weather_info['Wind Speed']} m/s\n\n"
         f"Provide personalized advice on how the current weather may impact individual's health based on their specific diseases, and suggest the best two-line prevention tips for person to stay healthy in this weather."
     )
     
@@ -101,7 +88,7 @@ def get_advice():
     condition = condition_entry.get()
     
     weather_api_key = "d01394afe15b6d7f6a57694cf32e67c1"  # Replace with your actual weather API key
-    openai_api_key = "sk-_MlVswHRJaTJ0GA5mutJROsrs_awf0yt6JR3DgCo8jT3BlbkFJvXGgiJ_eRyfOt8FDhRXw2yfPcH9QP8460KYpNSohAA" 
+    openai_api_key = "sk-ghryiOcyd97X-jJaUmhszoPElkNIqnZkutM4q44svlT3BlbkFJI5aXo8P_JHLOVDMEFqPbcix25ERwtUjhELLxzIIrwA" 
 
     weather_info = get_weather(city, weather_api_key)
 
@@ -116,7 +103,6 @@ def get_advice():
             f"Humidity: {weather_info['Humidity']}%\n"
             f"Weather Description: {weather_info['Weather Description']}\n"
             f"Wind Speed: {weather_info['Wind Speed']} m/s\n"
-            f"Air Quality Index (AQI): {weather_info['AQI']}\n"
         )
         
         forecast_text.delete(1.0, tk.END)
@@ -154,7 +140,7 @@ advice_button = tk.Button(root, text="Get Health Advice", command=get_advice)
 advice_button.grid(row=4, column=0, columnspan=2, pady=10)
 
 tk.Label(root, text="Weather Info:").grid(row=5, column=0, columnspan=2)
-weather_text = tk.Text(root, height=6, width=50)
+weather_text = tk.Text(root, height=5, width=50)
 weather_text.grid(row=6, column=0, columnspan=2, padx=10, pady=10)
 
 tk.Label(root, text="5-Day Forecast:").grid(row=7, column=0, columnspan=2)
