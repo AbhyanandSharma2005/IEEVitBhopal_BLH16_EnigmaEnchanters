@@ -14,7 +14,7 @@ Project Descreption :- Health Conscious Based Environmental Sustainable Weather 
 Technologies Used :- Python - core programming language .
                      Tkinter - built-in Python library used to create the graphical user interface (GUI) .
                      Requests - popular Python library used for making HTTP requests .
-                     OpenWeatherMap API - hird-party service that provides weather data & information .
+                     OpenWeatherMap API - third-party service that provides weather data & information .
                      OpenAI API - Another third-party service that provides AI capabilities used to generate personalized health advice based on the fetched weather data 
                      and the user's health information .
                      JSON - JavaScript Object Notation, used to parse and handle the data returned from the OpenWeatherMap API
